@@ -1,0 +1,245 @@
+*{ /* Reseteamos el formato web */
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+html, body {
+    height: 100%; 
+}
+
+body {/* Damos display flex para poder colocar los diferentes elementos en el interior */
+    font-family: Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #212121;
+}
+
+h1 {/* Damos estilo para el titulo */
+    text-align: center;
+    font-weight: bold;
+    background-color: #fff;
+    color: #000;
+    margin-top: 0.5rem;
+    padding: 1rem;
+    border-radius: 9px;
+    width: 100%;
+    font-size: 1em;
+}
+
+main {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.controles {/* Damos formato a los controles */
+    text-align: center;
+    margin: 20px;
+    color: white;
+    font-size: 20px;
+}
+
+button {
+    padding: 8px 16px;
+    font-size: 1rem;
+    margin: 4px;
+    color: #000;
+    background-color: #fff;
+    border-radius: 9px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+button:hover {/* Hacemos que cuando posicionemos el cursor sobre el button este adquiera un background plata */
+    background-color: silver;
+}
+
+button:disabled {/* Cuando el boton este desactivado advertimos al usuario bajando la opacidad, y modificando el cursor */
+    cursor: not-allowed;
+    opacity: 0.3;
+}
+
+#tablero {/* Damos display Grid para poner las cartas en columnas iguales de 4 y damos estilo */
+    display: grid;
+    visibility: hidden; 
+    grid-template-columns: repeat(4, 1fr);
+    background-image: url("./Recursos/perfect-green-grass.webp");
+    background-size: contain;
+    grid-gap: 0.625rem;
+    perspective: 1000px;
+    padding: 10px;
+    max-height: 90%;
+    justify-content: center;
+    border: 2px solid black; 
+    border-radius: 15px;
+}
+
+.carta {/* A continuación damos estilo y animación a nuestras cartas */
+    width: 4rem;
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 1rem;
+    background-image: url('./Recursos/hack-a-boss-logo.png');
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: black;
+}
+
+.carta:hover {
+transform: scale(1.05);
+}
+
+.carta.revelada {
+    transform: rotateY(180deg);
+    background: white;
+}
+
+.modal {/* Ademas de dar estilo, ponemos un z-index para que quede por encima */
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100000;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.contenido-modal {
+    background-color: rgba(245, 245, 245, 0.864);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 2px 6px 10px rgba(0, 0, 0, 0.5);
+}
+
+#parrafo-intentos { /* Oculto hasta que se inicia el juego */
+    visibility: hidden;
+    margin-top: 10px;
+}
+
+footer {
+    margin-top: 15px;
+    padding: 10px;
+    color: #fff;
+    text-align: center;
+    width: 100%; 
+    font-size: 1rem;
+}
+/* Estilos para los diferentes temas oscuro/claro */
+.modo-toggle {
+    position: fixed;
+    right: 20px; 
+    top: 20px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+}
+
+.modo-boton {
+    position: absolute;
+    border: none;
+    width: 40px;
+    height: 40px;
+}
+
+#modo-claro {
+    background-image: url('./Recursos/sunshine_.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#modo-oscuro {
+    display: none;
+    background-image: url('./Recursos/moon_stars.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+body.modo-claro {
+    background-color: #ffffff;
+}
+
+h1.modo-claro {
+    background-color: black;
+    color: white;
+}
+
+.controles.modo-claro {
+    color: black;
+    font-size: 20px;
+    margin: 20px;
+}
+
+.controles.modo-claro button {
+    margin: 4px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #000;
+    border-radius: 9px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+footer.modo-claro {
+    color: #000;
+}
+
+/* Media Queries */
+
+@media (min-width: 530px) {
+    .carta {
+        width: 7rem;
+        height: 10rem;
+        font-size: 3rem;
+    }
+}
+
+@media (min-width: 925px) {
+    .carta {
+        width: 8rem;
+        height: 11rem;
+    }
+}
+
+/* Barra de scroll */
+/* width */
+::-webkit-scrollbar {
+width: 5px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+background: transparent;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: rgba(85, 85, 85, 0.198);
+border-radius: 3px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+background: #555;
+}
